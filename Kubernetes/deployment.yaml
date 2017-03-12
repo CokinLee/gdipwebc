@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gdipwebc
+  labels:
+    name: gdipwebc
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: gdipwebc
+      labels:
+        name: gdipwebc
+    spec:
+      containers:
+        - name: gdipwebc
+          image: registry.gitlab.com/ktateish/gdipwebc:latest
+          env:
+            - name: GDIPWEBC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: gdipwebc-config
+                  key: url
+            - name: GDIPWEBC_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: gdipwebc-config
+                  key: user
+            - name: GDIPWEBC_DOMAIN_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: gdipwebc-config
+                  key: domain-name
+            - name: GDIPWEBC_INTERVAL
+              valueFrom:
+                configMapKeyRef:
+                  name: gdipwebc-config
+                  key: interval
+            - name: GDIPWEBC_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: gdipwebc-config
+                  key: debug
+            - name: GDIPWEBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gdipwebc-secret
+                  key: password

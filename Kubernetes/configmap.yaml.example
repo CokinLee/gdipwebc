@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gdipwebc-config
+  data:
+    url: http://example.com/
+    user: foo
+    domain-name: foo.example.org
+    interval: 5m
+    debug: "true"
